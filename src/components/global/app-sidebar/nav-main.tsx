@@ -5,6 +5,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { Clock } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
@@ -26,13 +28,25 @@ const NavMain = ({
   return (
     <SidebarGroup className="p-0">
       <SidebarMenu>
-        <SidebarMenuItem>
-          <SidebarMenuButton
-            asChild
-            tooltip={"TEST"}
-            className={`${pathname.includes("TEST") && "bg-background-80"}`}
-          ></SidebarMenuButton>
-        </SidebarMenuItem>
+        {items.map((item) => (
+          <SidebarMenuItem key={item.title}>
+            <SidebarMenuButton
+              asChild
+              tooltip={item.title}
+              className={`${pathname.includes(item.url) && "bg-muted"}`}
+            >
+              <Link
+                href={item.url}
+                className={`text-lg ${
+                  pathname.includes(item.url) && "font-bold"
+                }`}
+              >
+                <item.icon className="text-lg"></item.icon>
+                <span>{item.title}</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        ))}
       </SidebarMenu>
     </SidebarGroup>
   );
