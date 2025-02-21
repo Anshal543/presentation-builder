@@ -22,9 +22,9 @@ const Projects = ({ projects }: Props) => {
           projectId={project.id}
           title={project.title}
           createdAt={project.createdAt.toString()}
+          themeName={project.themeName}
           isDelete={project.isDeleted}
           slideData={project.slides}
-          src={project.thumbnail || ""}
         />
       ))}
     </motion.div>

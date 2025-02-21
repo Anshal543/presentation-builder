@@ -1,13 +1,15 @@
 import { Slide, Theme } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { Image } from "lucide-react";
 import React from "react";
 
 type Props = {
-  slide: Slide;
+  slide?: Slide;
   theme: Theme;
 };
 
 const ThumbnailPreview = ({ slide, theme }: Props) => {
+  // Todo add a preview of the slides
   return (
     <div
       className={cn(
@@ -20,7 +22,16 @@ const ThumbnailPreview = ({ slide, theme }: Props) => {
         backgroundImage: theme.gradientBackground,
       }}
     >
-      ThumbnailPreview
+      {slide ? (
+        <div className="scale-[0.5] origin-top-left w-[200%] h-[200%] overflow-hidden">
+          This is a slide
+          {/* <MasterRecursiveComponent /> */}
+        </div>
+      ) : (
+        <div className="w-full h-full bg-gray-400 flex justify-center items-center">
+          <Image className="w-6 h-6 text-gray-500" />
+        </div>
+      )}
     </div>
   );
 };
