@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "motion/react";
 import {
   containerVariants,
@@ -23,7 +23,7 @@ const CreatePage = ({ onSelectOption }: Props) => {
       animate="visible"
       className="space-y-8"
     >
-      <motion.div variants={itemVariants}>
+      <motion.div variants={itemVariants} className="text-center space-y-2">
         <h1 className="text-4xl font-bold text-primary">
           How would you like to get started?
         </h1>
@@ -90,7 +90,7 @@ const CreatePage = ({ onSelectOption }: Props) => {
           </motion.div>
         ))}
       </motion.div>
-      <RecentPrompts />
+      {prompts.length > 0 && <RecentPrompts />}
     </motion.div>
   );
 };

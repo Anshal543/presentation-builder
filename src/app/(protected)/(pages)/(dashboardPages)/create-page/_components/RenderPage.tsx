@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import CreatePage from "./CreatePage/CreatePage";
+import CreateAI from "./GenerateAI/CreateAI";
 
 type Props = {};
 
@@ -11,13 +12,27 @@ const RenderPage = (props: Props) => {
   const router = useRouter();
   const { page, setPage } = usePromptStore();
 
+  const handleBack = () => {
+    setPage("create");
+  };
+
+  const handleSelectOption = (option: string) => {
+    if (option === "template") {
+      router.push("/templates");
+    } else if (option === "create-scratch") {
+      setPage("create-scratch");
+    } else {
+      setPage("creative-ai");
+    }
+  };
+
   const renderStep = () => {
     switch (page) {
       case "create":
-        return <CreatePage />;
-      case "create-scratch":
-        return <></>;
+        return <CreatePage onSelectOption={handleSelectOption} />;
       case "creative-ai":
+        return <CreateAI onBack={handleBack} />;
+      case "create-scratch":
         return <></>;
       default:
         return null;

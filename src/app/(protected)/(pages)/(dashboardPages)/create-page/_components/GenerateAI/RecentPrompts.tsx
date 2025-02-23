@@ -6,11 +6,13 @@ import { containerVariants, itemVariants, timeAgo } from "@/lib/constants";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import useCreativeAIStore from "@/store/useCreativeAIStore";
+import { useToast } from "@/hooks/use-toast";
 
 type Props = {};
 
 const RecentPrompts = (props: Props) => {
   const { prompts, setPage } = usePromptStore();
+  const { toast } = useToast();
   const { addMultipleOutlines, setCurrentAiPrompt } = useCreativeAIStore();
   const handleEdit = (id: string) => {
     const prompt = prompts.find((prompt) => prompt.id === id);
@@ -18,6 +20,13 @@ const RecentPrompts = (props: Props) => {
       setPage("creative-ai");
       addMultipleOutlines(prompt?.outlines);
       setCurrentAiPrompt(prompt?.title);
+    } else {
+      toast({
+        title: "Error",
+        description: "Prompt not found",
+        variant: "destructive",
+        duration: 2000,
+      });
     }
   };
   return (
@@ -33,19 +42,16 @@ const RecentPrompts = (props: Props) => {
         className="space-y-2 w-full lg:max-w-[80%] mx-auto"
       >
         {prompts.map((prompt, i) => (
-          <motion.div
-            // key={i}
-            variants={itemVariants}
-          >
+          <motion.div key={i} variants={itemVariants}>
             <Card className="p-4 flex items-center justify-between hover:bg-accent/50 transition-colors duration-300">
               <div className="max-w-[70%]">
                 <h3 className="font-semibold text-xl line-clamp-1">
-                  {/* {prompt?.title} */}
-                  this is the title
+                  {prompt?.title}
+                  {/* this is the title */}
                 </h3>
                 <p className="font-semibold text-sm text-muted-foreground">
-                  {/* {timeAgo(prompt?.createdAt)} */}
-                  two days ago
+                  {timeAgo(prompt?.createdAt)}
+                  {/* two days ago */}
                 </p>
               </div>
               <div className="flex items-center gap-4">
