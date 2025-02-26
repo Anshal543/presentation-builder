@@ -96,7 +96,14 @@ const CardList = ({
       <AnimatePresence>
         {outlines.map((card, idx) => (
           <React.Fragment key={card.id}>
-            <Card />
+            <Card
+              onDragOver={(e) => onDragOver(e, idx)}
+              card={card}
+              isEditing={editingCard === card.id}
+              isSelected={selectedCard === card.id}
+              editText={editText}
+              onEditChange={onEditChange}
+            />
           </React.Fragment>
         ))}
       </AnimatePresence>
