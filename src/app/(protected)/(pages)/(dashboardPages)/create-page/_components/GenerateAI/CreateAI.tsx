@@ -15,6 +15,8 @@ import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import CardList from "../Common/CardList";
+import usePromptStore from "@/store/usePromptStore";
+import RecentPrompts from "./RecentPrompts";
 
 type Props = {
   onBack: () => void;
@@ -27,6 +29,8 @@ const CreateAI = ({ onBack }: Props) => {
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [editText, setEditText] = useState("");
   const [noOfCards, setNoOfCards] = useState(0);
+
+  const { prompts, addPrompt } = usePromptStore();
 
   const {
     currentAiPrompt,
@@ -51,6 +55,7 @@ const CreateAI = ({ onBack }: Props) => {
   };
   // Todo complete this function
   const generateOutline = () => {};
+  const handleGenerate = () => {};
 
   return (
     <motion.div
@@ -153,6 +158,22 @@ const CreateAI = ({ onBack }: Props) => {
         setEditingCard={setEditingCard}
         setSelectedCard={setSelectedCard}
       />
+      {outlines?.length > 0 && (
+        <Button
+          className="w-full"
+          onClick={handleGenerate}
+          disabled={isGenerating}
+        >
+          {isGenerating ? (
+            <>
+              <Loader2 className="animate-spin mr-2" /> Generating...
+            </>
+          ) : (
+            "Generate PPT"
+          )}
+        </Button>
+      )}
+      {prompts?.length > 0 && <RecentPrompts />}
     </motion.div>
   );
 };
