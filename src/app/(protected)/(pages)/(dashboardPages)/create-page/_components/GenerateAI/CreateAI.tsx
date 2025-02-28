@@ -17,6 +17,9 @@ import React, { useState } from "react";
 import CardList from "../Common/CardList";
 import usePromptStore from "@/store/usePromptStore";
 import RecentPrompts from "./RecentPrompts";
+import { useToast } from "@/hooks/use-toast";
+import { OutlineCard } from "@/lib/types";
+import { generateCreativePrompt } from "@/actions/chatgpt";
 
 type Props = {
   onBack: () => void;
@@ -24,6 +27,7 @@ type Props = {
 
 const CreateAI = ({ onBack }: Props) => {
   const router = useRouter();
+  const { toast } = useToast();
   const [isGenerating, setIsGenerating] = useState(false);
   const [editingCard, setEditingCard] = useState<string | null>(null);
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
@@ -54,7 +58,21 @@ const CreateAI = ({ onBack }: Props) => {
     resetOutlines();
   };
   // Todo complete this function
-  const generateOutline = () => {};
+  const generateOutline = async () => {
+    if (currentAiPrompt === "") {
+      toast({
+        title: "Error",
+        description: "Please enter a prompt to generate an outline.",
+        variant: "destructive",
+      });
+      console.log("Please enter a prompt to generate an outline.");
+      return;
+    }
+    setIsGenerating(true);
+
+    const res = await generateCreativePrompt(currentAiPrompt);
+    // Todo complete this funciton
+  };
   const handleGenerate = () => {};
 
   return (
