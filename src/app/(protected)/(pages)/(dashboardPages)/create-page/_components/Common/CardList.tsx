@@ -141,7 +141,7 @@ const CardList = ({
 
   const onAddCard = (index?: number) => {
     const newCard: OutlineCard = {
-      id: Math.random().toString(36).substr(2, 9),
+      id: Math.random().toString(36).substring(2, 9),
       title: editText || "New Section",
       order: (index !== undefined ? index + 1 : outlines.length) + 1,
     };

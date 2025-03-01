@@ -71,7 +71,7 @@ const CreateAI = ({ onBack }: Props) => {
     setIsGenerating(true);
 
     const res = await generateCreativePrompt(currentAiPrompt);
-    // Todo complete this funciton
+    // Todo use openAI and  complete this funciton
   };
   const handleGenerate = () => {};
 
