@@ -8,6 +8,7 @@ import { redirect, useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import ThemeCard from "./ThemeCard";
 import ThemePicker from "./ThemePicker";
+import { themes } from "@/lib/constants";
 
 type Props = {};
 
@@ -17,6 +18,11 @@ const ThemePreview = (props: Props) => {
   const controls = useAnimation();
   const { currentTheme, setCurrentTheme, project } = useSlideStore();
   const [selectedTheme, setSelectedTheme] = useState<Theme>(currentTheme);
+
+  const applyTheme = (theme: Theme) => {
+    setSelectedTheme(theme);
+    setCurrentTheme(theme);
+  };
 
   useEffect(() => {
     if (project?.slides) {
@@ -190,7 +196,11 @@ const ThemePreview = (props: Props) => {
           </div>
         </div>
       </div>
-      <ThemePicker />
+      <ThemePicker
+        selectedTheme={selectedTheme}
+        themes={themes}
+        onThemeSelect={applyTheme}
+      />
     </div>
   );
 };

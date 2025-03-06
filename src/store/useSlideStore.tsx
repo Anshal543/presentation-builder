@@ -10,6 +10,9 @@ interface SlideState {
   setSlides: (slides: Slide[]) => void;
   currentTheme: Theme;
   setCurrentTheme: (theme: Theme) => void;
+  resetSlideStore: () => void;
+  currentSlide: number;
+  setCurrentSlide: (index: number) => void;
 }
 
 const defaultTheme: Theme = {
@@ -31,6 +34,17 @@ export const useSlideStore = create(
       setProject: (project) => set({ project }),
       currentTheme: defaultTheme,
       setCurrentTheme: (theme: Theme) => set({ currentTheme: theme }),
+      resetSlideStore: () => {
+        set({
+          project: null,
+          slides: [],
+          currentTheme: defaultTheme,
+        });
+      },
+      currentSlide: 0,
+      setCurrentSlide: (index: number) => {
+        set({ currentSlide: index });
+      },
     }),
     {
       name: "slides-storage",
