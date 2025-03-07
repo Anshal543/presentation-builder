@@ -67,7 +67,7 @@ const ThemePicker = ({
       toast({
         title: "Success",
         description: "Layouts generated successfully",
-        variant: "destructive",
+        variant: "default",
       });
       router.push(`/presentation/${params?.presentationId}`);
       setSlides(res.data);

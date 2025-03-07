@@ -13,6 +13,8 @@ interface SlideState {
   resetSlideStore: () => void;
   currentSlide: number;
   setCurrentSlide: (index: number) => void;
+  getOrderedSlides: () => Slide[];
+  reorderSlides: (fromIndex: number, toIndex: number) => void;
 }
 
 const defaultTheme: Theme = {
@@ -45,6 +47,12 @@ export const useSlideStore = create(
       setCurrentSlide: (index: number) => {
         set({ currentSlide: index });
       },
+      getOrderedSlides: () => {
+        return get()
+          .slides.slice()
+          .sort((a, b) => a.slideOrder - b.slideOrder);
+      },
+      reorderSlides: () => {},
     }),
     {
       name: "slides-storage",
