@@ -11,6 +11,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Navbar from "./_components/Navbar/Navbar";
 import LayoutPreview from "./_components/editor-sidebar/leftsidebar/LayoutPreview";
+import Editor from "./_components/editor/Editor";
 
 type Props = {};
 
@@ -74,6 +75,9 @@ const Page = (props: Props) => {
           }}
         >
           <LayoutPreview loading={isLoading} />
+          <div className="flex-1 ml-64 pr-16">
+            <Editor isEditable={true} loading={isLoading} />
+          </div>
         </div>
       </div>
     </DndProvider>
