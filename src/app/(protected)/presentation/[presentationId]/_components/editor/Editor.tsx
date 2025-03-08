@@ -1,15 +1,65 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LayoutSlides } from "@/lib/types";
+import { LayoutSlides, Slide } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useSlideStore } from "@/store/useSlideStore";
 import React, { useEffect, useRef } from "react";
-import { useDrop } from "react-dnd";
+import { useDrag, useDrop } from "react-dnd";
 import { v4 as uuidv4 } from "uuid";
+import MasterRecursiveComponent from "./MasterRecursiveComponent";
 
-type Props = {
+interface DraggableSlideProps {
+  slide: Slide;
+  index: number;
+  moveSlide: (dragIndex: number, hoverIndex: number) => void;
+  handleDelete: (id: string) => void;
   isEditable: boolean;
-  loading: boolean;
+  imageLoading: boolean;
+}
+
+const DraggableSlide: React.FC<DraggableSlideProps> = ({
+  handleDelete,
+  imageLoading = false,
+  index,
+  isEditable,
+  moveSlide,
+  slide,
+}) => {
+  const ref = useRef(null);
+  const { currentSlide, setCurrentSlide, currentTheme, updateContentItem } =
+    useSlideStore();
+  const [{ isDragging }, drag] = useDrag({
+    type: "SLIDE",
+    item: {
+      index,
+      type: "SLIDE",
+    },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+    canDrag: isEditable,
+  });
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "w-full rounded-lg shadow-lg relative p-0 min-h-[400px] max-h-[800px]",
+        "shadow-xl transition-shadow duration-300",
+        "flex flex-col",
+        index === currentSlide ? "ring-2 ring-blue-500 ring-offset-2" : "",
+        slide.className,
+        isDragging ? "opacity-50" : "opacity-100"
+      )}
+      onClick={() => setCurrentSlide(index)}
+      style={{
+        backgroundImage: currentTheme.gradientBackground,
+      }}
+    >
+      <div className="w-full h-full flex-grow overflow-hidden">
+        <MasterRecursiveComponent />
+      </div>
+    </div>
+  );
 };
 
 interface DropZoneProps {
@@ -51,8 +101,18 @@ const DropZone: React.FC<DropZoneProps> = ({ index, isEditable, onDrop }) => {
         isOver && canDrop ? "border-green-500 bg-green-100" : "border-gray-300",
         canDrop ? "border-blue-300" : ""
       )}
-    ></div>
+    >
+      {isOver && canDrop && (
+        <div className="h-full flex items-center justify-center text-green-600">
+          Drop here
+        </div>
+      )}
+    </div>
   );
+};
+type Props = {
+  isEditable: boolean;
+  loading: boolean;
 };
 
 const Editor = ({ isEditable, loading }: Props) => {
@@ -65,6 +125,7 @@ const Editor = ({ isEditable, loading }: Props) => {
     slides,
     project,
   } = useSlideStore();
+  const orderedSlides = getOrderedSlides();
 
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -115,6 +176,11 @@ const Editor = ({ isEditable, loading }: Props) => {
             {isEditable && (
               <DropZone index={0} onDrop={handleDrop} isEditable={isEditable} />
             )}
+            {orderedSlides.map((slide, index) => (
+              <React.Fragment key={slide.id || index}>
+                <DraggableSlide />
+              </React.Fragment>
+            ))}
           </div>
         </ScrollArea>
       )}
