@@ -20,6 +20,8 @@ const Page = (props: Props) => {
   const { setTheme } = useTheme();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
+  const [imageLoading, setImageLoading] = useState(true);
+
   const { setSlides, setProject, currentTheme, setCurrentTheme } =
     useSlideStore();
   useEffect(() => {
@@ -51,6 +53,7 @@ const Page = (props: Props) => {
         redirect("/dashboard");
       } finally {
         setIsLoading(false);
+        setImageLoading(false);
       }
     })();
   }, []);
@@ -76,7 +79,11 @@ const Page = (props: Props) => {
         >
           <LayoutPreview loading={isLoading} />
           <div className="flex-1 ml-64 pr-16">
-            <Editor isEditable={true} loading={isLoading} />
+            <Editor
+              isEditable={true}
+              loading={isLoading}
+              imageLoading={imageLoading}
+            />
           </div>
         </div>
       </div>
