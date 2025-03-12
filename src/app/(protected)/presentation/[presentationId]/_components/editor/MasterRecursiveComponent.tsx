@@ -11,6 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import { DropZone } from "./DropZone";
 import Paragraph from "@/components/global/editor/components/Paragraph";
+import TableComponent from "@/components/global/editor/components/TableComponent";
 
 interface MasterRecursiveComponentProps {
   content: ContentItem;
