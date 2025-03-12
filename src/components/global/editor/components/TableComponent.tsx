@@ -1,7 +1,11 @@
 "use client";
-import { ResizablePanelGroup } from "@/components/ui/resizable";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
 import { useSlideStore } from "@/store/useSlideStore";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface TableComponentProps {
   content: string[][];
@@ -29,6 +33,37 @@ const TableComponent: React.FC<TableComponentProps> = ({
   const [rowSizes, setRowSizes] = useState<number[]>([]);
   const [colSizes, setColSizes] = useState<number[]>([]);
   const { currentTheme } = useSlideStore();
+
+  const handleResizeCol = (index: number, newSize: number) => {
+    if (!isEditable) return;
+    const newSizes = [...colSizes];
+    newSizes[index] = newSize;
+    setColSizes(newSizes);
+  };
+
+  const handleResizeRow = (index: number, newSize: number) => {
+    if (!isEditable) return;
+    const newSizes = [...rowSizes];
+    newSizes[index] = newSize;
+    setRowSizes(newSizes);
+  };
+
+  useEffect(() => {
+    setRowSizes(new Array(tableData.length).fill(100 / tableData.length));
+    setColSizes(new Array(tableData[0].length).fill(100 / tableData[0].length));
+  }, [tableData]);
+
+  const updateCell = (rowIndex: number, colIndex: number, value: string) => {
+    if (!isEditable) return;
+    const newData = tableData.map((row, rIndex) =>
+      rIndex === rowIndex
+        ? row.map((cell, cIndex) => (cIndex === colIndex ? value : cell))
+        : row
+    );
+    setTableData(newData);
+    onChange(newData);
+  };
+
   if (isPreview) {
     return (
       <div className="w-full overflow-x-auto text-xs">
@@ -64,6 +99,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
       </div>
     );
   }
+
   return (
     <div
       className="w-full h-full relative"
@@ -85,7 +121,48 @@ const TableComponent: React.FC<TableComponentProps> = ({
             : "min-h-[100px]"
         }`}
         onLayout={(sizes) => setRowSizes(sizes)}
-      ></ResizablePanelGroup>
+      >
+        {tableData.map((row, rowIndex) => (
+          <React.Fragment key={rowIndex}>
+            {rowIndex > 0 && <ResizableHandle />}
+            <ResizablePanel
+              defaultSize={rowSizes[rowIndex]}
+              onResize={(size) => handleResizeRow(rowIndex, size)}
+              className="w-full h-full"
+            >
+              <ResizablePanelGroup
+                direction="horizontal"
+                onLayout={(sizes) => setColSizes(sizes)}
+                className="w-full h-full"
+              >
+                {row.map((cell, colIndex) => (
+                  <React.Fragment key={colIndex}>
+                    {colIndex > 0 && <ResizableHandle />}
+                    <ResizablePanel
+                      defaultSize={colSizes[colIndex]}
+                      onResize={(size) => handleResizeCol(colIndex, size)}
+                      className="w-full h-full min-h-9"
+                    >
+                      <div className="relative w-full h-full min-h-3">
+                        <input
+                          value={cell}
+                          onChange={(e) =>
+                            updateCell(rowIndex, colIndex, e.target.value)
+                          }
+                          className="w-full h-full p-4 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
+                          style={{ color: currentTheme.fontColor }}
+                          placeholder="Type here"
+                          readOnly={!isEditable}
+                        />
+                      </div>
+                    </ResizablePanel>
+                  </React.Fragment>
+                ))}
+              </ResizablePanelGroup>
+            </ResizablePanel>
+          </React.Fragment>
+        ))}
+      </ResizablePanelGroup>
     </div>
   );
 };

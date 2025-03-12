@@ -96,7 +96,19 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = memo(
       case "table":
         return (
           <motion.div {...animationProps} className="w-full h-full">
-            <TableComponent />
+            <TableComponent
+              content={content.content as string[][]}
+              onChange={(newContent) =>
+                onContentChange(
+                  content.id,
+                  newContent !== null ? newContent : ""
+                )
+              }
+              initialRowSize={content.initialColumns}
+              initialColSize={content.initialRows}
+              isPreview={isPreview}
+              isEditable={isEditable}
+            />
           </motion.div>
         );
       case "column":
