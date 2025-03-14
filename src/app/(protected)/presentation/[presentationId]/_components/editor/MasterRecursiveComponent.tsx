@@ -12,6 +12,8 @@ import { cn } from "@/lib/utils";
 import { DropZone } from "./DropZone";
 import Paragraph from "@/components/global/editor/components/Paragraph";
 import TableComponent from "@/components/global/editor/components/TableComponent";
+import ColumnComponent from "@/components/global/editor/components/ColumnComponent";
+import CustomImage from "@/components/global/editor/components/ImageComponent";
 
 interface MasterRecursiveComponentProps {
   content: ContentItem;
@@ -108,6 +110,38 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = memo(
               initialColSize={content.initialRows}
               isPreview={isPreview}
               isEditable={isEditable}
+            />
+          </motion.div>
+        );
+      case "resizable-column":
+        if (Array.isArray(content.content)) {
+          return (
+            <motion.div {...animationProps} className="w-full h-full">
+              <ColumnComponent
+                content={content.content as ContentItem[]}
+                className={content.className}
+                onContentChange={onContentChange}
+                slideId={slideId}
+                isPreview={isPreview}
+                isEditable={isEditable}
+                imageLoading={imageLoading}
+              />
+            </motion.div>
+          );
+        }
+        return null;
+      case "image":
+        return (
+          <motion.div {...animationProps} className="w-full h-full">
+            <CustomImage
+              src={content.content as string}
+              alt={content.alt || "image"}
+              className={content.className}
+              isPreview={isPreview}
+              contentId={content.id}
+              onContentChange={onContentChange}
+              isEditable={isEditable}
+              imageLoading={imageLoading}
             />
           </motion.div>
         );
