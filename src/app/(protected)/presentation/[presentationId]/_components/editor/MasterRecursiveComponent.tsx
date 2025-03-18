@@ -21,6 +21,9 @@ import {
   TodoList,
 } from "@/components/global/editor/components/ListComponent";
 import CalloutBox from "@/components/global/editor/components/CalloutBox";
+import CodeBlock from "@/components/global/editor/components/CodeBlock";
+import TableOfContents from "@/components/global/editor/components/TableOfContents";
+import { Divider } from "@/components/global/editor/components/Divider";
 
 interface MasterRecursiveComponentProps {
   content: ContentItem;
@@ -202,6 +205,35 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = memo(
             >
               <Paragraph {...commonProps} />
             </CalloutBox>
+          </motion.div>
+        );
+      case "codeBlock":
+        return (
+          <motion.div {...animationProps} className="w-full h-full">
+            <CodeBlock
+              code={content.code}
+              language={content.language}
+              onChange={() => {}}
+              className={content.className}
+            />
+          </motion.div>
+        );
+      case "tableOfContents":
+        return (
+          <motion.div {...animationProps} className="w-full h-full">
+            <TableOfContents
+              items={content.content as string[]}
+              onItemClick={(id) => {
+                console.log(`Navigate to section: ${id}`);
+              }}
+              className={content.className}
+            />
+          </motion.div>
+        );
+      case "divider":
+        return (
+          <motion.div {...animationProps} className="w-full h-full">
+            <Divider className={content.className} />
           </motion.div>
         );
       case "column":
