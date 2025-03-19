@@ -49,7 +49,11 @@ const DraggableSlidePreview = ({ index, moveSlide, slide }: Props) => {
       onClick={() => setCurrentSlide(index)}
     >
       <div className="pl-2 mb-4 relative">
-        <ScaledPreview />
+        <ScaledPreview
+          slide={slide}
+          isActive={index === currentSlide}
+          index={index}
+        />
       </div>
     </div>
   );
