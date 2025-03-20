@@ -1,3 +1,4 @@
+import { MasterRecursiveComponent } from "@/app/(protected)/presentation/[presentationId]/_components/editor/MasterRecursiveComponent";
 import { Slide, Theme } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Image } from "lucide-react";
@@ -9,7 +10,6 @@ type Props = {
 };
 
 const ThumbnailPreview = ({ slide, theme }: Props) => {
-  // Todo add a preview of the slides
   return (
     <div
       className={cn(
@@ -24,8 +24,13 @@ const ThumbnailPreview = ({ slide, theme }: Props) => {
     >
       {slide ? (
         <div className="scale-[0.5] origin-top-left w-[200%] h-[200%] overflow-hidden">
-          This is a slide
-          {/* <MasterRecursiveComponent /> */}
+          <MasterRecursiveComponent
+            slideId={slide.id}
+            content={slide.content}
+            onContentChange={() => {}}
+            isPreview={true}
+            imageLoading={false}
+          />
         </div>
       ) : (
         <div className="w-full h-full bg-gray-400 flex justify-center items-center">
