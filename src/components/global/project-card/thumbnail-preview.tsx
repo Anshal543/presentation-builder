@@ -27,6 +27,7 @@ const ThumbnailPreview = ({ slide, theme }: Props) => {
           <MasterRecursiveComponent
             slideId={slide.id}
             content={slide.content}
+            classname={slide.className}
             onContentChange={() => {}}
             isPreview={true}
             imageLoading={false}
