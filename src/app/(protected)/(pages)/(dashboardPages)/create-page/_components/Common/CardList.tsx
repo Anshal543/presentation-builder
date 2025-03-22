@@ -165,6 +165,7 @@ const CardList = ({
     <motion.div
       className="space-y-2 -my-2"
       layout
+      // Note onDragOver calculates where to insert drag component
       onDragOver={(e) => {
         e.preventDefault();
         if (
@@ -175,6 +176,7 @@ const CardList = ({
           onDragOver(e, outlines.length);
         }
       }}
+      // Note onDrop updates the list order
       onDrop={(e) => {
         e.preventDefault();
         onDrop(e);

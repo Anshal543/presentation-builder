@@ -61,7 +61,6 @@ const CreateAI = ({ onBack }: Props) => {
     setCurrentAiPrompt("");
     resetOutlines();
   };
-  // Todo complete this function
   const generateOutline = async () => {
     if (currentAiPrompt === "") {
       toast({
@@ -242,17 +241,17 @@ const CreateAI = ({ onBack }: Props) => {
         addOutline={addOutline}
         addMultipleOutlines={addMultipleOutlines}
         editingCard={editingCard}
+        setEditingCard={setEditingCard}
         selectedCard={selectedCard}
+        setSelectedCard={setSelectedCard}
         editText={editText}
+        setEditText={setEditText}
         onEditChange={setEditText}
         onCardSelect={setSelectedCard}
         onCardDoubleClick={(id, title) => {
           setEditingCard(id);
           setEditText(title);
         }}
-        setEditText={setEditText}
-        setEditingCard={setEditingCard}
-        setSelectedCard={setSelectedCard}
       />
       {outlines?.length > 0 && (
         <Button
