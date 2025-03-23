@@ -6,7 +6,7 @@ import { Search } from "lucide-react";
 
 const SearchBar = () => {
   return (
-    <div className="min-w-[58%] relative flex items-center border rounded-full bg-primary-90">
+    <div className="min-w-[55%] relative flex items-center border rounded-full bg-primary-90">
       <Button
         type="submit"
         size="sm"

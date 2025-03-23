@@ -166,16 +166,16 @@ const CardList = ({
       className="space-y-2 -my-2"
       layout
       // Note onDragOver calculates where to insert drag component
-      onDragOver={(e) => {
-        e.preventDefault();
-        if (
-          outlines.length === 0 ||
-          // Note do search about getBoundingclientRect and its logic
-          e.clientY > e.currentTarget.getBoundingClientRect().bottom - 20
-        ) {
-          onDragOver(e, outlines.length);
-        }
-      }}
+      // onDragOver={(e) => {
+      //   e.preventDefault();
+      //   if (
+      //     outlines.length === 0 ||
+      //     // Note do search about getBoundingclientRect and its logic
+      //     e.clientY > e.currentTarget.getBoundingClientRect().bottom - 20
+      //   ) {
+      //     onDragOver(e, outlines.length);
+      //   }
+      // }}
       // Note onDrop updates the list order
       onDrop={(e) => {
         e.preventDefault();
