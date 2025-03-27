@@ -41,6 +41,7 @@ const CardList = ({
   const onDragOver = (e: React.DragEvent, index: number) => {
     e.preventDefault();
     if (!draggedItem) return;
+    console.log("🟣,enter onDragOver");
     const rect = e.currentTarget.getBoundingClientRect();
     const y = e.clientY - rect.top;
     const threshold = rect.height / 2;
@@ -111,6 +112,7 @@ const CardList = ({
     e.dataTransfer.setDragImage(draggedEl, 0, dragOffsetY.current);
 
     setTimeout(() => {
+      console.log("🔴setTimeout executed");
       setDragOverIndex(outlines.findIndex((c) => c.id === card.id));
       document.body.removeChild(draggedEl);
     }, 0);
