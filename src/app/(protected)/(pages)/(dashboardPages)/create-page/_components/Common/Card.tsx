@@ -1,7 +1,7 @@
 "use client";
 import { OutlineCard } from "@/lib/types";
 import { motion } from "motion/react";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Card as UICard } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -42,6 +42,11 @@ const Card = ({
   dragOverStyles,
 }: CardProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current?.focus();
+    }
+  }, [isEditing]);
   return (
     <motion.div
       layout
