@@ -61,6 +61,7 @@ const CreateAI = ({ onBack }: Props) => {
     setCurrentAiPrompt("");
     resetOutlines();
   };
+
   const generateOutline = async () => {
     if (currentAiPrompt === "") {
       toast({

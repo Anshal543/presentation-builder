@@ -66,6 +66,7 @@ const ThemePreview = (props: Props) => {
       </Button>
     </div>
   );
+
   const mainCardContent = (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -109,6 +110,7 @@ const ThemePreview = (props: Props) => {
       </div>
     </div>
   );
+
   const rightCardContent = (
     <div className="space-y-4">
       <div
@@ -143,6 +145,7 @@ const ThemePreview = (props: Props) => {
       </Button>
     </div>
   );
+
   return (
     <div
       className="h-screen w-full flex"
