@@ -505,8 +505,8 @@ const generateImageUrl = async (prompt: string): Promise<string> => {
       n: 1,
       size: "1024x1024",
     });
-    console.log("🟢dalleResponse Image generated successfully:", dalleResponse);
-    // console.log("🟢 Image generated successfully:", dalleResponse.data[0]?.url);
+    // console.log("🟢dalleResponse Image generated successfully:", dalleResponse);
+    console.log("🟢 Image generated successfully:", dalleResponse.data[0]?.url);
     // Research download image from dall-e
     const imageUrl = dalleResponse.data[0]?.url;
     if (!imageUrl) {
@@ -598,7 +598,7 @@ export const generateLayoutsJson = async (outlineArray: string[]) => {
       max_tokens: 5000,
       temperature: 0.7,
     });
-    console.log("🟣Completion", completion.choices[0].message);
+    // console.log("🟣Completion", completion.choices[0].message);
     // Review see the output in console to see actual output
     const responseContent = completion?.choices?.[0]?.message?.content;
 
@@ -609,7 +609,7 @@ export const generateLayoutsJson = async (outlineArray: string[]) => {
     try {
       // Review console the data after parsing to json
       jsonResponse = JSON.parse(responseContent.replace(/```json|```/g, ""));
-      console.log("🟢jsonResponse", jsonResponse);
+      // console.log("🟢jsonResponse", jsonResponse);
       await Promise.all(jsonResponse.map(replaceImagePlaceholders));
     } catch (error) {
       console.log("🔴 ERROR:", error);

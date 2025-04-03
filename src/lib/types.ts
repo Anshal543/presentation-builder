@@ -84,6 +84,7 @@ export interface LayoutSlides {
   type: string;
 }
 
+/*
 [
   {
     id: "f8c9d9f9-7c3f-4f51-8b34-3b97b8bbf4d2",
@@ -325,3 +326,659 @@ export interface LayoutSlides {
     slideName: "Three Columns with Headings",
   },
 ];
+*/
+
+/*
+[
+  {
+    id: "e4c6b1b5-3f52-4c8d-a7f9-9e2d6cbb1f8d",
+    type: "imageAndText",
+    content: {
+      id: "8a4f4c0d-5f45-4aa3-b9eb-b2dbe9f6e7d2",
+      name: "Column",
+      type: "column",
+      content: [
+        {
+          id: "b76d11c2-efc6-4e8a-a742-8c4e4e4fd4b0",
+          name: "Image and text",
+          type: "resizable-column",
+          content: [
+            {
+              id: "f1b8d0a4-9ec4-4da4-b9d2-3d0e72f8c8a1",
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: "3e1d7b9d-9c3d-4f4e-a8fd-4a6f0c4b1e5a",
+                  alt: "An abstract representation of database management with interconnected nodes and a central server",
+                  name: "Image",
+                  type: "image",
+                  content:
+                    "https://ucarecdn.com/bd774507-4b32-40df-adfc-73fa442bed38/",
+                  className: "p-3",
+                },
+              ],
+            },
+            {
+              id: "9f8d1c2e-6f52-4e9b-9c9e-7e2d6f8b2dc3",
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: "8b2f1c3d-9e4a-4ea9-b8fd-7f0d9c6b1e8f",
+                  name: "Heading1",
+                  type: "heading1",
+                  content: "A Database Management System (DBMS)",
+                  placeholder: "Heading1",
+                },
+                {
+                  id: "3e9b1c2d-7f4a-4c8d-a8e9-b7f0d2c1e8f1",
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content:
+                    "A DBMS is software that enables users to define, create, maintain, and control access to databases.",
+                  placeholder: "Start typing here",
+                },
+              ],
+              className: "w-full h-full p-8 flex justify-center items-center",
+              placeholder: "Heading1",
+            },
+          ],
+          className: "border",
+        },
+      ],
+    },
+    className: "min-h-[300px] p-8 mx-auto flex justify-center items-center",
+    slideName: "What is DBMS?",
+  },
+  {
+    id: "9b3c8f4d-6e8a-42b1-a9f1-2d7f8c1e9d6b",
+    type: "accentLeft",
+    content: {
+      id: "f8b9e1c2-7d4a-4c8e-b9f0-2d6b7e4c1e9a",
+      name: "Column",
+      type: "column",
+      content: [
+        {
+          id: "2e9b1c7d-4a6f-42b8-a9f0-7d6b1e4c8f2a",
+          name: "Resizable column",
+          type: "resizable-column",
+          content: [
+            {
+              id: "4e8a1c9b-7f6d-4b2a-a9f1-8c2d7f6b1e9c",
+              alt: "Data being organized and analyzed in a digital interface",
+              name: "Image",
+              type: "image",
+              content:
+                "https://ucarecdn.com/bff39f9b-ece9-4d2d-b4f7-f3912eeb3dcf/",
+            },
+            {
+              id: "1c9b7f6d-4e8a-4f2b-a6f1-9c2d7e8b1f9d",
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: "7d4a6f8c-1e9b-4b2a-a9f0-2c8f1e6d9b7f",
+                  name: "Heading1",
+                  type: "heading1",
+                  content: "Purpose of DBMS",
+                  placeholder: "Heading1",
+                },
+                {
+                  id: "4a7d6f8b-1e9c-4b2a-a8f0-2c9b1e6d7f8a",
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content:
+                    "DBMS provides a systematic and organized way of storing, managing, and retrieving data efficiently.",
+                  placeholder: "Start typing here",
+                },
+              ],
+              className: "w-full h-full p-8 flex justify-center items-center",
+              placeholder: "Heading1",
+            },
+          ],
+          restrictToDrop: true,
+        },
+      ],
+      restrictDropTo: true,
+    },
+    className: "min-h-[300px]",
+    slideName: "Purpose of DBMS",
+  },
+  {
+    id: "8f6d9b7e-1e4c-4a2b-a9f0-2c9b1f8d7e6a",
+    type: "threeColumns",
+    content: {
+      id: "9b7e6a1c-4f8d-4a2b-a6f1-7d9e4c8b2f1a",
+      name: "Column",
+      type: "column",
+      content: [
+        {
+          id: "6d9b7e1c-4f8a-4b2a-a9f0-7e6a4c1f9b2d",
+          name: "Title",
+          type: "title",
+          content: "Types of Database Management Systems",
+          placeholder: "Untitled Card",
+        },
+        {
+          id: "2f8b7e1d-4a6c-49b2-a9f0-1c9e7d6a4b8f",
+          name: "Text and image",
+          type: "resizable-column",
+          content: [
+            {
+              id: "4c9b7e6a-1f8d-4b2a-a6f1-7e8a4d1f9b2c",
+              name: "Paragraph",
+              type: "paragraph",
+              content: "Hierarchical DBMS",
+              placeholder: "Start typing...",
+            },
+            {
+              id: "7f6a4b8d-1e9c-4a2b-a6f1-9e7c4d1f8b2a",
+              name: "Paragraph",
+              type: "paragraph",
+              content: "Network DBMS",
+              placeholder: "Start typing...",
+            },
+            {
+              id: "9b8f6a4c-1e7d-4a2b-a9f0-6e4c1f9b7d2a",
+              name: "Paragraph",
+              type: "paragraph",
+              content: "Relational DBMS",
+              placeholder: "Start typing...",
+            },
+            {
+              id: "7e6a4b9f-1c8d-4a2b-a6f1-9b7d4c1f8e2a",
+              name: "Paragraph",
+              type: "paragraph",
+              content: "Object-oriented DBMS",
+              placeholder: "Start typing...",
+            },
+          ],
+          className: "border",
+        },
+      ],
+    },
+    className: "p-4 mx-auto flex justify-center items-center",
+    slideName: "Types of DBMS",
+  },
+  {
+    id: "7f9e6b1c-4a2d-4b8f-a9f0-2c6a1e7d4b9f",
+    type: "twoColumnsWithHeadings",
+    content: {
+      id: "9e7d6a4b-1f8c-4a2b-a9f0-6b1c4f9e7d2a",
+      name: "Column",
+      type: "column",
+      content: [
+        {
+          id: "6a4b9e7d-1f8c-4a2b-a9f0-7d1c4f9e6b2a",
+          name: "Title",
+          type: "title",
+          content: "Key Components of a DBMS",
+          placeholder: "Untitled Card",
+        },
+        {
+          id: "4b9e6a1c-7f8d-4a2b-a9f0-1e7d6c4b9f2a",
+          name: "Text and image",
+          type: "resizable-column",
+          content: [
+            {
+              id: "1f7d9e6b-4a8c-4b2a-a9f0-6a4c7e9b1d2a",
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: "e7d6a4b9-1c8f-4a2b-a9f0-7c4b1f9e6d2a",
+                  name: "Heading3",
+                  type: "heading3",
+                  content: "Database Engine",
+                  placeholder: "Heading 3",
+                },
+                {
+                  id: "9f7d6b1e-4a8c-4b2a-a6f1-7e4c1b9f6d2a",
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content: "Handles data storage, retrieval, and update.",
+                  placeholder: "Start typing...",
+                },
+              ],
+            },
+            {
+              id: "6b4e7a9f-1c8d-4b2a-a9f0-7d2e9c4b6f1a",
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: "1d7e6a4b-9f8c-4a2b-a6f1-7c9b4e1f7d2a",
+                  name: "Heading3",
+                  type: "heading3",
+                  content: "Query Processor",
+                  placeholder: "Heading 3",
+                },
+                {
+                  id: "9e6a4b1f-7d8c-4a2b-a9f0-6b7c1e9f4d2a",
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content: "Executes user queries efficiently.",
+                  placeholder: "Start typing...",
+                },
+              ],
+            },
+          ],
+          className: "border",
+        },
+      ],
+    },
+    className: "p-4 mx-auto flex justify-center items-center",
+    slideName: "Components of DBMS",
+  },
+  {
+    id: "9e7d6a4c-1f8b-4a2b-a9f0-2b1c4f9e7d6a",
+    type: "textAndImage",
+    content: {
+      id: "4a8b1e9d-6c7b-4a2f-a9f0-6b1f7d2c9e4a",
+      name: "Column",
+      type: "column",
+      content: [
+        {
+          id: "1e7d9b6a-4f8c-4a2b-a9f0-7c4b6f1e9d2a",
+          name: "Text and image",
+          type: "resizable-column",
+          content: [
+            {
+              id: "4a7e9b6f-1c8d-4a2b-a9f0-6b7d1f9c4e2a",
+              name: "",
+              type: "column",
+              content: [
+                {
+                  id: "9b6a4e7d-1f8c-4a2b-a6f1-7d1c4b9f6e2a",
+                  name: "Heading1",
+                  type: "heading1",
+                  content: "Advantages of DBMS",
+                  placeholder: "Heading1",
+                },
+                {
+                  id: "1f9e6a7d-4b8c-4a2b-a9f0-6c7b1e4f9d2a",
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content:
+                    "DBMS offers data integrity, security, backup and recovery, and reduced data redundancy.",
+                  placeholder: "Start typing here",
+                },
+              ],
+              className: "w-full h-full p-8 flex justify-center items-center",
+              placeholder: "Heading1",
+            },
+            {
+              id: "7d9e6a1f-4c8b-4a2b-a9f0-6b1c7e4f9d2a",
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: "4e7d9b6a-1c8f-4a2b-a6f1-9b1c4f7e6d2a",
+                  alt: "A secure database icon with a shield and checkmark symbolizing integrity and security",
+                  name: "Image",
+                  type: "image",
+                  content:
+                    "https://ucarecdn.com/fef2a8ee-c417-4bd9-bc9a-151cff3ca09a/",
+                  className: "p-3",
+                },
+              ],
+            },
+          ],
+          className: "border",
+        },
+      ],
+    },
+    className: "min-h-[300px] p-8 mx-auto flex justify-center items-center",
+    slideName: "Advantages of DBMS",
+  },
+  {
+    id: "6d7f9e4b-1c8a-4a2b-a9f0-2b1e9c4f7d6a",
+    type: "twoColumns",
+    content: {
+      id: "9e6b1f7d-4a8c-4b2a-a9f0-7c4d6e1b9f2a",
+      name: "Column",
+      type: "column",
+      content: [
+        {
+          id: "1f9e7d6b-4a8c-4a2b-a9f0-7c4b6e1f9d2a",
+          name: "Title",
+          type: "title",
+          content: "Examples of DBMS Software",
+          placeholder: "Untitled Card",
+        },
+        {
+          id: "6b1f9e7d-4c8a-4b2b-a6f0-7d4e1c9b6f2a",
+          name: "Text and image",
+          type: "resizable-column",
+          content: [
+            {
+              id: "9b6f1e7d-4a8c-4a2b-a9f0-6c7d4e1b9f2a",
+              name: "",
+              type: "paragraph",
+              content: "MySQL",
+              placeholder: "Start typing...",
+            },
+            {
+              id: "7d4e6b9f-1c8a-4a2b-a6f0-9b1c4f7e6a2b",
+              name: "",
+              type: "paragraph",
+              content: "Oracle Database",
+              placeholder: "Start typing...",
+            },
+            {
+              id: "4b9e7d6a-1f8c-4a2b-a9f0-6b1c7e4f9d2a",
+              name: "",
+              type: "paragraph",
+              content: "Microsoft SQL Server",
+              placeholder: "Start typing...",
+            },
+            {
+              id: "9e1f7d6b-4a8c-4a2b-a6f0-7c4b9f6e2a1d",
+              name: "",
+              type: "paragraph",
+              content: "PostgreSQL",
+              placeholder: "Start typing...",
+            },
+          ],
+          className: "border",
+        },
+      ],
+    },
+    className: "p-4 mx-auto flex justify-center items-center",
+    slideName: "Examples of DBMS",
+  },
+];
+*/
+
+/*
+content: '```json\n' +
+    '[\n' +
+    '  {\n' +
+    '    "id": "e4c6b1b5-3f52-4c8d-a7f9-9e2d6cbb1f8d",\n' +
+    '    "slideName": "What is DBMS?",\n' +
+    '    "type": "imageAndText",\n' +
+    '    "className": "min-h-[300px] p-8 mx-auto flex justify-center items-center",\n' +
+    '    "content": {\n' +
+    '      "id": "8a4f4c0d-5f45-4aa3-b9eb-b2dbe9f6e7d2",\n' +
+    '      "type": "column",\n' +
+    '      "name": "Column",\n' +
+    '      "content": [\n' +
+    '        {\n' +
+    '          "id": "b76d11c2-efc6-4e8a-a742-8c4e4e4fd4b0",\n' +
+    '          "type": "resizable-column",\n' +
+    '          "name": "Image and text",\n' +
+    '          "className": "border",\n' +
+    '          "content": [\n' +
+    '            {\n' +
+    '              "id": "f1b8d0a4-9ec4-4da4-b9d2-3d0e72f8c8a1",\n' +
+    '              "type": "column",\n' +
+    '              "name": "Column",\n' +
+    '              "content": [\n' +
+    '                {\n' +
+    '                  "id": "3e1d7b9d-9c3d-4f4e-a8fd-4a6f0c4b1e5a",\n' +
+    '                  "type": "image",\n' +
+    '                  "name": "Image",\n' +
+    '                  "className": "p-3",\n' +
+    '                  "content": "https://via.placeholder.com/800x400?text=DBMS+Concept",\n' +
+    '                  "alt": "An abstract representation of database management with interconnected nodes and a central server"\n' +
+    '                }\n' +
+    '              ]\n' +
+    '            },\n' +
+    '            {\n' +
+    '              "id": "9f8d1c2e-6f52-4e9b-9c9e-7e2d6f8b2dc3",\n' +
+    '              "type": "column",\n' +
+    '              "name": "Column",\n' +
+    '              "content": [\n' +
+    '                {\n' +
+    '                  "id": "8b2f1c3d-9e4a-4ea9-b8fd-7f0d9c6b1e8f",\n' +
+    '                  "type": "heading1",\n' +
+    '                  "name": "Heading1",\n' +
+    '                  "content": "A Database Management System (DBMS)",\n' +
+    '                  "placeholder": "Heading1"\n' +
+    '                },\n' +
+    '                {\n' +
+    '                  "id": "3e9b1c2d-7f4a-4c8d-a8e9-b7f0d2c1e8f1",\n' +
+    '                  "type": "paragraph",\n' +
+    '                  "name": "Paragraph",\n' +
+    '                  "content": "A DBMS is software that enables users to define, create, maintain, and control access to databases.",\n' +
+    '                  "placeholder": "Start typing here"\n' +
+    '                }\n' +
+    '              ],\n' +
+    '              "className": "w-full h-full p-8 flex justify-center items-center",\n' +
+    '              "placeholder": "Heading1"\n' +
+    '            }\n' +
+    '          ]\n' +
+    '        }\n' +
+    '      ]\n' +
+    '    }\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "id": "9b3c8f4d-6e8a-42b1-a9f1-2d7f8c1e9d6b",\n' +
+    '    "slideName": "Purpose of DBMS",\n' +
+    '    "type": "accentLeft",\n' +
+    '    "className": "min-h-[300px]",\n' +
+    '    "content": {\n' +
+    '      "id": "f8b9e1c2-7d4a-4c8e-b9f0-2d6b7e4c1e9a",\n' +
+    '      "type": "column",\n' +
+    '      "name": "Column",\n' +
+    '      "restrictDropTo": true,\n' +
+    '      "content": [\n' +
+    '        {\n' +
+    '          "id": "2e9b1c7d-4a6f-42b8-a9f0-7d6b1e4c8f2a",\n' +
+    '          "type": "resizable-column",\n' +
+    '          "name": "Resizable column",\n' +
+    '          "restrictToDrop": true,\n' +
+    '          "content": [\n' +
+    '            {\n' +
+    '              "id": "4e8a1c9b-7f6d-4b2a-a9f1-8c2d7f6b1e9c",\n' +
+    '              "type": "image",\n' +
+    '              "name": "Image",\n' +
+    '              "content": "https://via.placeholder.com/600x400?text=Data+Management",\n' +
+    '              "alt": "Data being organized and analyzed in a digital interface"\n' +
+    '            },\n' +
+    '            {\n' +
+    '              "id": "1c9b7f6d-4e8a-4f2b-a6f1-9c2d7e8b1f9d",\n' +
+    '              "type": "column",\n' +
+    '              "name": "Column",\n' +
+    '              "content": [\n' +
+    '                {\n' +
+    '                  "id": "7d4a6f8c-1e9b-4b2a-a9f0-2c8f1e6d9b7f",\n' +
+    '                  "type": "heading1",\n' +
+    '                  "name": "Heading1",\n' +
+    '                  "content": "Purpose of DBMS",\n' +
+    '                  "placeholder": "Heading1"\n' +
+    '                },\n' +
+    '                {\n' +
+    '                  "id": "4a7d6f8b-1e9c-4b2a-a8f0-2c9b1e6d7f8a",\n' +
+    '                  "type": "paragraph",\n' +
+    '                  "name": "Paragraph",\n' +
+    '                  "content": "DBMS provides a systematic and organized way of storing, managing, and retrieving data efficiently.",\n' +
+    '                  "placeholder": "Start typing here"\n' +
+    '                }\n' +
+    '              ],\n' +
+    '              "className": "w-full h-full p-8 flex justify-center items-center",\n' +
+    '              "placeholder": "Heading1"\n' +
+    '            }\n' +
+    '          ]\n' +
+    '        }\n' +
+    '      ]\n' +
+    '    }\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "id": "8f6d9b7e-1e4c-4a2b-a9f0-2c9b1f8d7e6a",\n' +
+    '    "slideName": "Types of DBMS",\n' +
+    '    "type": "threeColumns",\n' +
+    '    "className": "p-4 mx-auto flex justify-center items-center",\n' +
+    '    "content": {\n' +
+    '      "id": "9b7e6a1c-4f8d-4a2b-a6f1-7d9e4c8b2f1a",\n' +
+    '      "type": "column",\n' +
+    '      "name": "Column",\n' +
+    '      "content": [\n' +
+    '        {\n' +
+    '          "id": "6d9b7e1c-4f8a-4b2a-a9f0-7e6a4c1f9b2d",\n' +
+    '          "type": "title",\n' +
+    '          "name": "Title",\n' +
+    '          "content": "Types of Database Management Systems",\n' +
+    '          "placeholder": "Untitled Card"\n' +
+    '        },\n' +
+    '        {\n' +
+    '          "id": "2f8b7e1d-4a6c-49b2-a9f0-1c9e7d6a4b8f",\n' +
+    '          "type": "resizable-column",\n' +
+    '          "name": "Text and image",\n' +
+    '          "className": "border",\n' +
+    '          "content": [\n' +
+    '            {\n' +
+    '              "id": "4c9b7e6a-1f8d-4b2a-a6f1-7e8a4d1f9b2c",\n' +
+    '              "type": "paragraph",\n' +
+    '              "name": "Paragraph",\n' +
+    '              "content": "Hierarchical DBMS",\n' +
+    '              "placeholder": "Start typing..."\n' +
+    '            },\n' +
+    '            {\n' +
+    '              "id": "7f6a4b8d-1e9c-4a2b-a6f1-9e7c4d1f8b2a",\n' +
+    '              "type": "paragraph",\n' +
+    '              "name": "Paragraph",\n' +
+    '              "content": "Network DBMS",\n' +
+    '              "placeholder": "Start typing..."\n' +
+    '            },\n' +
+    '            {\n' +
+    '              "id": "9b8f6a4c-1e7d-4a2b-a9f0-6e4c1f9b7d2a",\n' +
+    '              "type": "paragraph",\n' +
+    '              "name": "Paragraph",\n' +
+    '              "content": "Relational DBMS",\n' +
+    '              "placeholder": "Start typing..."\n' +
+    '            },\n' +
+    '            {\n' +
+    '              "id": "7e6a4b9f-1c8d-4a2b-a6f1-9b7d4c1f8e2a",\n' +
+    '              "type": "paragraph",\n' +
+    '              "name": "Paragraph",\n' +
+    '              "content": "Object-oriented DBMS",\n' +
+    '              "placeholder": "Start typing..."\n' +
+    '            }\n' +
+    '          ]\n' +
+    '        }\n' +
+    '      ]\n' +
+    '    }\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "id": "7f9e6b1c-4a2d-4b8f-a9f0-2c6a1e7d4b9f",\n' +
+    '    "slideName": "Components of DBMS",\n' +
+    '    "type": "twoColumnsWithHeadings",\n' +
+    '    "className": "p-4 mx-auto flex justify-center items-center",\n' +
+    '    "content": {\n' +
+    '      "id": "9e7d6a4b-1f8c-4a2b-a9f0-6b1c4f9e7d2a",\n' +
+    '      "type": "column",\n' +
+    '      "name": "Column",\n' +
+    '      "content": [\n' +
+    '        {\n' +
+    '          "id": "6a4b9e7d-1f8c-4a2b-a9f0-7d1c4f9e6b2a",\n' +
+    '          "type": "title",\n' +
+    '          "name": "Title",\n' +
+    '          "content": "Key Components of a DBMS",\n' +
+    '          "placeholder": "Untitled Card"\n' +
+    '        },\n' +
+    '        {\n' +
+    '          "id": "4b9e6a1c-7f8d-4a2b-a9f0-1e7d6c4b9f2a",\n' +
+    '          "type": "resizable-column",\n' +
+    '          "name": "Text and image",\n' +
+    '          "className": "border",\n' +
+    '          "content": [\n' +
+    '            {\n' +
+    '              "id": "1f7d9e6b-4a8c-4b2a-a9f0-6a4c7e9b1d2a",\n' +
+    '              "type": "column",\n' +
+    '              "name": "Column",\n' +
+    '              "content": [\n' +
+    '                {\n' +
+    '                  "id": "e7d6a4b9-1c8f-4a2b-a9f0-7c4b1f9e6d2a",\n' +
+    '                  "type": "heading3",\n' +
+    '                  "name": "Heading3",\n' +
+    '                  "content": "Database Engine",\n' +
+    '                  "placeholder": "Heading 3"\n' +
+    '                },\n' +
+    '                {\n' +
+    '                  "id": "9f7d6b1e-4a8c-4b2a-a6f1-7e4c1b9f6d2a",\n' +
+    '                  "type": "paragraph",\n' +
+    '                  "name": "Paragraph",\n' +
+    '                  "content": "Handles data storage, retrieval, and update.",\n' +
+    '                  "placeholder": "Start typing..."\n' +
+    '                }\n' +
+    '              ]\n' +
+    '            },\n' +
+    '            {\n' +
+    '              "id": "6b4e7a9f-1c8d-4b2a-a9f0-7d2e9c4b6f1a",\n' +
+    '              "type": "column",\n' +
+    '              "name": "Column",\n' +
+    '              "content": [\n' +
+    '                {\n' +
+    '                  "id": "1d7e6a4b-9f8c-4a2b-a6f1-7c9b4e1f7d2a",\n' +
+    '                  "type": "heading3",\n' +
+    '                  "name": "Heading3",\n' +
+    '                  "content": "Query Processor",\n' +
+    '                  "placeholder": "Heading 3"\n' +
+    '                },\n' +
+    '                {\n' +
+    '                  "id": "9e6a4b1f-7d8c-4a2b-a9f0-6b7c1e9f4d2a",\n' +
+    '                  "type": "paragraph",\n' +
+    '                  "name": "Paragraph",\n' +
+    '                  "content": "Executes user queries efficiently.",\n' +
+    '                  "placeholder": "Start typing..."\n' +
+    '                }\n' +
+    '              ]\n' +
+    '            }\n' +
+    '          ]\n' +
+    '        }\n' +
+    '      ]\n' +
+    '    }\n' +
+    '  },\n' +
+    '  {\n' +
+    '    "id": "9e7d6a4c-1f8b-4a2b-a9f0-2b1c4f9e7d6a",\n' +
+    '    "slideName": "Advantages of DBMS",\n' +
+    '    "type": "textAndImage",\n' +
+    '    "className": "min-h-[300px] p-8 mx-auto flex justify-center items-center",\n' +
+    '    "content": {\n' +
+    '      "id": "4a8b1e9d-6c7b-4a2f-a9f0-6b1f7d2c9e4a",\n' +
+    '      "type": "column",\n' +
+    '      "name": "Column",\n' +
+    '      "content": [\n' +
+    '        {\n' +
+    '          "id": "1e7d9b6a-4f8c-4a2b-a9f0-7c4b6f1e9d2a",\n' +
+    '          "type": "resizable-column",\n' +
+    '          "name": "Text and image",\n' +
+    '          "className": "border",\n' +
+    '          "content": [\n' +
+    '            {\n' +
+    '              "id": "4a7e9b6f-1c8d-4a2b-a9f0-6b7d1f9c4e2a",\n' +
+    '              "type": "column",\n' +
+    '              "name": "",\n' +
+    '              "content": [\n' +
+    '                {\n' +
+    '                  "id": "9b6a4e7d-1f8c-4a2b-a6f1-7d1c4b9f6e2a",\n' +
+    '                  "type": "heading1",\n' +
+    '                  "name": "Heading1",\n' +
+    '                  "content": "Advantages of DBMS",\n' +
+    '                  "placeholder": "Heading1"\n' +
+    '                },\n' +
+    '                {\n' +
+    '                  "id": "1f9e6a7d-4b8c-4a2b-a9f0-6c7b1e4f9d2a",\n' +
+    '                  "type": "paragraph",\n' +
+    '                  "name": "Paragraph",\n' +
+    '                  "content": "DBMS offers data integrity, security, backup and recovery, and reduced data redundancy.",\n' +
+    '                  "placeholder": "Start typing here"\n' +
+    '                }\n' +
+    '              ],\n' +
+    '              "className": "w-full h-full p-8 flex justify-center items-center",\n' +
+    '              "placeholder": "Heading1"\n' +
+    '            },\n' +
+    '            {\n' +
+    '              "id": "7d9e6a1f-4c8b-4a2b-a9f0-6b1c7e4f9d2a",\n' +
+    '              "type": "column",\n' +
+    '              "name": "Column",\n' +
+    '              "content": [\n' +
+    '                {\n' +
+    '                  "id": "4e7d9b6a-1c8f-4a2b-a6f1-9b1c4f7e6d2a",\n' +
+    '                  "type": "image",\n' +
+    '                  "name": "Image",\n' +
+    '                  "className": "p-3",\n' +
+    '                  "content": "https://via.placeholder.com/700x400?text=Advantages+o'
+*/
