@@ -4,6 +4,8 @@ import { client } from "@/lib/prisma";
 import { ContentItem, ContentType, Slide } from "@/lib/types";
 import { currentUser } from "@clerk/nextjs/server";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
+import { uploadDirect } from "@uploadcare/upload-client";
 
 export const generateCreativePrompt = async (userPrompt: string) => {
   console.log("🟢 Generating creative prompt...", userPrompt);
@@ -503,9 +505,27 @@ const generateImageUrl = async (prompt: string): Promise<string> => {
       n: 1,
       size: "1024x1024",
     });
-    console.log("🟢 Image generated successfully:", dalleResponse.data[0]?.url);
+    console.log("🟢dalleResponse Image generated successfully:", dalleResponse);
+    // console.log("🟢 Image generated successfully:", dalleResponse.data[0]?.url);
+    // Research download image from dall-e
+    const imageUrl = dalleResponse.data[0]?.url;
+    if (!imageUrl) {
+      console.error("image cannot be generated");
+      return "https://via.placeholder.com/1024";
+    }
+    const imageResponse = await axios.get(imageUrl, {
+      responseType: "arraybuffer",
+    });
+    const imageBuffer = Buffer.from(imageResponse.data);
+    const result = await uploadDirect(imageBuffer, {
+      publicKey: process.env.UPLOADCARE_PUBLIC_KEY!,
+      store: "auto",
+    });
 
-    return dalleResponse.data[0]?.url || "https://via.placeholder.com/1024";
+    return result?.uuid
+      ? `https://ucarecdn.com/${result.uuid}/`
+      : "https://via.placeholder.com/1024";
+    // return dalleResponse.data[0]?.url || "https://via.placeholder.com/1024";
   } catch (error) {
     console.error("Failed to generate image:", error);
     return "https://via.placeholder.com/1024";
@@ -539,7 +559,154 @@ const replaceImagePlaceholders = async (layout: Slide) => {
 };
 
 export const generateLayoutsJson = async (outlineArray: string[]) => {
-  const prompt = `### Guidelines
+  const prompt = `
+  1. Write layouts based on the specific outline provided. Do not use types that are not mentioned in the example layouts.
+    2. Use diverse and engaging designs, ensuring each layout is unique.
+    3. Adhere to the structure of existing layouts but add new styles or components if needed.
+    4. Fill placeholder data into content fields where required.
+    5. Generate unique image placeholders for the 'content' property of image components and also alt text according to the outline.
+    6. Ensure proper formatting and schema alignment for the output JSON.
+
+    ### Example Layouts:
+    ${JSON.stringify(existingLayouts, null, 2)}
+
+    ### Outline Array:
+    ${JSON.stringify(outlineArray)}
+
+    For each entry in the outline array, generate:
+    - A unique JSON layout with creative designs.
+    - Properly filled content, including placeholders for image components.
+    - Clear and well-structured JSON data.
+    For Images
+    - The alt text should describe the image clearly and concisely.
+    - Focus on the main subject(s) of the image and any relevant details such as colors, shapes, people, or objects.
+    - Ensure the alt text aligns with the context of the presentation slide it will be used on (e.g., professional, educational, business-related).
+    - Avoid using terms like "image of" or "picture of," and instead focus directly on the content and meaning.
+
+    Output the layouts in JSON format. Ensure there are no duplicate layouts across the array.`;
+  try {
+    console.log("🟢 Generating layouts...");
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-2024-11-20",
+      messages: [
+        {
+          role: "system",
+          content: "You generate JSON layouts for presentations.",
+        },
+        { role: "user", content: prompt },
+      ],
+      max_tokens: 5000,
+      temperature: 0.7,
+    });
+    console.log("🟣Completion", completion.choices[0].message);
+    // Review see the output in console to see actual output
+    const responseContent = completion?.choices?.[0]?.message?.content;
+
+    if (!responseContent) {
+      return { status: 400, error: "No content generated" };
+    }
+    let jsonResponse;
+    try {
+      // Review console the data after parsing to json
+      jsonResponse = JSON.parse(responseContent.replace(/```json|```/g, ""));
+      console.log("🟢jsonResponse", jsonResponse);
+      await Promise.all(jsonResponse.map(replaceImagePlaceholders));
+    } catch (error) {
+      console.log("🔴 ERROR:", error);
+      throw new Error("Invalid JSON format received from AI");
+    }
+    console.log("🟢 Layouts generated successfully");
+    return { status: 200, data: jsonResponse };
+  } catch (error) {
+    console.error("🔴 ERROR:", error);
+    return { status: 500, error: "Internal server error" };
+  }
+};
+
+export const generateLayouts = async (projectId: string, theme: string) => {
+  try {
+    if (!projectId) {
+      return { status: 400, error: "Project ID is required" };
+    }
+    const user = await currentUser();
+    if (!user) {
+      return { status: 403, error: "User not authenticated" };
+    }
+
+    const userExist = await client.user.findUnique({
+      where: { clerkId: user.id },
+    });
+
+    if (!userExist || !userExist.subscription) {
+      return {
+        status: 403,
+        error: !userExist?.subscription
+          ? "User does not have an active subscription"
+          : "User not found in the database",
+      };
+    }
+
+    const project = await client.project.findUnique({
+      where: { id: projectId, isDeleted: false },
+    });
+
+    if (!project) {
+      return { status: 404, error: "Project not found" };
+    }
+
+    if (!project.outlines || project.outlines.length === 0) {
+      return { status: 400, error: "Project does not have any outlines" };
+    }
+
+    const layouts = await generateLayoutsJson(project.outlines);
+
+    if (layouts.status !== 200) {
+      return layouts;
+    }
+
+    await client.project.update({
+      where: { id: projectId },
+      data: { slides: layouts.data, themeName: theme },
+    });
+
+    return { status: 200, data: layouts.data };
+  } catch (error) {
+    console.error("🔴 ERROR:", error);
+    return { status: 500, error: "Internal server error", data: [] };
+  }
+};
+/*
+`
+  1. Write layouts based on the specific outline provided. Do not use types that are not mentioned in the example layouts.
+    2. Use diverse and engaging designs, ensuring each layout is unique.
+    3. Adhere to the structure of existing layouts but add new styles or components if needed.
+    4. Fill placeholder data into content fields where required.
+    5. Generate unique image placeholders for the 'content' property of image components and also alt text according to the outline.
+    6. Ensure proper formatting and schema alignment for the output JSON.
+
+    ### Example Layouts:
+    ${JSON.stringify(existingLayouts, null, 2)}
+
+    ### Outline Array:
+    ${JSON.stringify(outlineArray)}
+
+    For each entry in the outline array, generate:
+    - A unique JSON layout with creative designs.
+    - Properly filled content, including placeholders for image components.
+    - Clear and well-structured JSON data.
+    For Images
+    - The alt text should describe the image clearly and concisely.
+    - Focus on the main subject(s) of the image and any relevant details such as colors, shapes, people, or objects.
+    - Ensure the alt text aligns with the context of the presentation slide it will be used on (e.g., professional, educational, business-related).
+    - Avoid using terms like "image of" or "picture of," and instead focus directly on the content and meaning.
+
+    Output the layouts in JSON format. Ensure there are no duplicate layouts across the array.`;
+
+    
+*/
+
+/*
+`### Guidelines
 You are a highly creative AI that generates JSON-based layouts for presentations. I will provide you with a pattern and a format to follow, and for each outline, you must generate unique layouts and contents and give me the output in the JSON format expected.
 Our final JSON output is a combination of layouts and elements. The available LAYOUTS TYPES are as follows: "accentLeft", "accentRight", "imageAndText", "textAndImage", "twoColumns", "twoColumnsWithHeadings", "threeColumns", "threeColumnsWithHeadings", "fourColumns", "twoImageColumns", "threeImageColumns", "fourImageColumns", "tableLayout".
 The available CONTENT TYPES are "heading1", "heading2", "heading3", "heading4", "title", "paragraph", "table", "resizable-column", "image", "blockquote", "numberedList", "bulletList", "todoList", "calloutBox", "codeBlock", "tableOfContents", "divider", "column"
@@ -675,118 +842,4 @@ ${JSON.stringify([
 
   Output the layouts in JSON format. Ensure there are no duplicate layouts across the array.
 `;
-  try {
-    console.log("🟢 Generating layouts...");
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-2024-11-20",
-      messages: [
-        {
-          role: "system",
-          content: "You generate JSON layouts for presentations.",
-        },
-        { role: "user", content: prompt },
-      ],
-      max_tokens: 5000,
-      temperature: 0.7,
-    });
-    const responseContent = completion?.choices?.[0]?.message?.content;
-
-    if (!responseContent) {
-      return { status: 400, error: "No content generated" };
-    }
-    let jsonResponse;
-    try {
-      jsonResponse = JSON.parse(responseContent.replace(/```json|```/g, ""));
-      await Promise.all(jsonResponse.map(replaceImagePlaceholders));
-    } catch (error) {
-      console.log("🔴 ERROR:", error);
-      throw new Error("Invalid JSON format received from AI");
-    }
-    console.log("🟢 Layouts generated successfully");
-    return { status: 200, data: jsonResponse };
-  } catch (error) {
-    console.error("🔴 ERROR:", error);
-    return { status: 500, error: "Internal server error" };
-  }
-};
-
-export const generateLayouts = async (projectId: string, theme: string) => {
-  try {
-    if (!projectId) {
-      return { status: 400, error: "Project ID is required" };
-    }
-    const user = await currentUser();
-    if (!user) {
-      return { status: 403, error: "User not authenticated" };
-    }
-
-    const userExist = await client.user.findUnique({
-      where: { clerkId: user.id },
-    });
-
-    if (!userExist || !userExist.subscription) {
-      return {
-        status: 403,
-        error: !userExist?.subscription
-          ? "User does not have an active subscription"
-          : "User not found in the database",
-      };
-    }
-
-    const project = await client.project.findUnique({
-      where: { id: projectId, isDeleted: false },
-    });
-
-    if (!project) {
-      return { status: 404, error: "Project not found" };
-    }
-
-    if (!project.outlines || project.outlines.length === 0) {
-      return { status: 400, error: "Project does not have any outlines" };
-    }
-
-    const layouts = await generateLayoutsJson(project.outlines);
-
-    if (layouts.status !== 200) {
-      return layouts;
-    }
-
-    await client.project.update({
-      where: { id: projectId },
-      data: { slides: layouts.data, themeName: theme },
-    });
-
-    return { status: 200, data: layouts.data };
-  } catch (error) {
-    console.error("🔴 ERROR:", error);
-    return { status: 500, error: "Internal server error", data: [] };
-  }
-};
-
-/*
-`
-  1. Write layouts based on the specific outline provided. Do not use types that are not mentioned in the example layouts.
-    2. Use diverse and engaging designs, ensuring each layout is unique.
-    3. Adhere to the structure of existing layouts but add new styles or components if needed.
-    4. Fill placeholder data into content fields where required.
-    5. Generate unique image placeholders for the 'content' property of image components and also alt text according to the outline.
-    6. Ensure proper formatting and schema alignment for the output JSON.
-
-    ### Example Layouts:
-    ${JSON.stringify(existingLayouts, null, 2)}
-
-    ### Outline Array:
-    ${JSON.stringify(outlineArray)}
-
-    For each entry in the outline array, generate:
-    - A unique JSON layout with creative designs.
-    - Properly filled content, including placeholders for image components.
-    - Clear and well-structured JSON data.
-    For Images
-    - The alt text should describe the image clearly and concisely.
-    - Focus on the main subject(s) of the image and any relevant details such as colors, shapes, people, or objects.
-    - Ensure the alt text aligns with the context of the presentation slide it will be used on (e.g., professional, educational, business-related).
-    - Avoid using terms like "image of" or "picture of," and instead focus directly on the content and meaning.
-
-    Output the layouts in JSON format. Ensure there are no duplicate layouts across the array.`
 */

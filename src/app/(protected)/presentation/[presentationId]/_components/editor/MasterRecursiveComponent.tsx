@@ -131,7 +131,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = memo(
             <motion.div {...animationProps} className="w-full h-full">
               <ColumnComponent
                 content={content.content as ContentItem[]}
-                className={classname}
+                className={content.className}
                 onContentChange={onContentChange}
                 slideId={slideId}
                 isPreview={isPreview}
@@ -148,7 +148,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = memo(
             <CustomImage
               src={content.content as string}
               alt={content.alt || "image"}
-              className={classname}
+              className={content.className}
               isPreview={isPreview}
               contentId={content.id}
               onContentChange={onContentChange}
@@ -184,7 +184,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = memo(
             <BulletList
               items={content.content as string[]}
               onChange={(newItems) => onContentChange(content.id, newItems)}
-              className={classname}
+              className={content.className}
             />
           </motion.div>
         );
@@ -194,7 +194,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = memo(
             <TodoList
               items={content.content as string[]}
               onChange={(newItems) => onContentChange(content.id, newItems)}
-              className={classname}
+              className={content.className}
             />
           </motion.div>
         );
@@ -203,7 +203,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = memo(
           <motion.div {...animationProps} className="w-full h-full">
             <CalloutBox
               type={content.callOutType || "info"}
-              className={classname}
+              className={content.className}
             >
               <Paragraph {...commonProps} />
             </CalloutBox>
@@ -216,7 +216,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = memo(
               code={content.code}
               language={content.language}
               onChange={() => {}}
-              className={classname}
+              className={content.className}
             />
           </motion.div>
         );
@@ -228,14 +228,14 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = memo(
               onItemClick={(id) => {
                 console.log(`Navigate to section: ${id}`);
               }}
-              className={classname}
+              className={content.className}
             />
           </motion.div>
         );
       case "divider":
         return (
           <motion.div {...animationProps} className="w-full h-full">
-            <Divider className={classname} />
+            <Divider className={content.className} />
           </motion.div>
         );
       case "column":
@@ -243,7 +243,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = memo(
           return (
             <motion.div
               {...animationProps}
-              className={cn("w-full h-full flex flex-col", classname)}
+              className={cn("w-full h-full flex flex-col", content.className)}
             >
               {content.content.length > 0 ? (
                 (content.content as ContentItem[]).map(
