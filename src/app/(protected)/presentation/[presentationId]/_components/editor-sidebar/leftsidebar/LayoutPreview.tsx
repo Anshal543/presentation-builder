@@ -12,6 +12,7 @@ type Props = {
 const LayoutPreview = ({ loading }: Props) => {
   const { getOrderedSlides, reorderSlides } = useSlideStore();
   const slides = getOrderedSlides();
+  // console.log(slides);
   const moveSlide = (dragIndex: number, hoverIndex: number) => {
     reorderSlides(dragIndex, hoverIndex);
   };

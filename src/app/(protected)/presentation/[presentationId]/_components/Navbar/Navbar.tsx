@@ -10,6 +10,7 @@ import React, { useState } from "react";
 type Props = { presentationId: string };
 
 const Navbar = ({ presentationId }: Props) => {
+  // Note complete this comp
   const { currentTheme } = useSlideStore();
   const [isPresentationMode, setIsPresentationMode] = useState(false);
   const { toast } = useToast();

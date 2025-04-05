@@ -41,6 +41,7 @@ const CustomImage = ({
             height={isPreview ? 48 : 800}
             alt={alt}
             className={`object-cover w-full h-full rounded-lg ${className}`}
+            priority
           />
           {!isPreview && isEditable && (
             <div className="absolute top-0 left-0 hidden group-hover:block">
