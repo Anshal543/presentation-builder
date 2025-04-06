@@ -300,7 +300,7 @@ export const MasterRecursiveComponent: React.FC<MasterRecursiveComponentProps> =
       content,
       onContentChange,
       isPreview = false,
-      isEditable = true,
+      isEditable = false,
       slideId,
       index,
       imageLoading = false,
