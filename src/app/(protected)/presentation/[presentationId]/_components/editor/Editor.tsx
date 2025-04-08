@@ -154,6 +154,7 @@ const DropZone: React.FC<DropZoneProps> = ({ index, isEditable, onDrop }) => {
     </div>
   );
 };
+
 type Props = {
   isEditable: boolean;
   loading: boolean;
