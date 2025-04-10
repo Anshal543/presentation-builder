@@ -174,6 +174,7 @@ const Editor = ({ isEditable, loading, imageLoading = false }: Props) => {
   const orderedSlides = getOrderedSlides();
 
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const autosaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const moveSlide = (dragIndex: number, hoverIndex: number) => {
     if (isEditable) {
@@ -207,6 +208,7 @@ const Editor = ({ isEditable, loading, imageLoading = false }: Props) => {
       moveSlide(item.index, dropIndex);
     }
   };
+
   useEffect(() => {
     if (slideRefs.current[currentSlide]) {
       slideRefs.current[currentSlide]?.scrollIntoView({
@@ -215,6 +217,18 @@ const Editor = ({ isEditable, loading, imageLoading = false }: Props) => {
       });
     }
   }, [currentSlide]);
+
+  useEffect(() => {
+    if (autosaveTimeoutRef.current) {
+      clearTimeout(autosaveTimeoutRef.current);
+    }
+    if (isEditable) {
+      autosaveTimeoutRef.current = setTimeout(() => {
+        // save funciton
+      }, 2000);
+    }
+  }, []);
+
   return (
     <div className="flex-1 flex flex-col h-full max-w-3xl mx-auto px-4 mb-20">
       {loading ? (
