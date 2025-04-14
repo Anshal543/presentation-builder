@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { LayoutSlides, Slide } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useSlideStore } from "@/store/useSlideStore";
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { v4 as uuidv4 } from "uuid";
 import { MasterRecursiveComponent } from "./MasterRecursiveComponent";
@@ -218,6 +218,10 @@ const Editor = ({ isEditable, loading, imageLoading = false }: Props) => {
     }
   }, [currentSlide]);
 
+  const saveSlides = useCallback(() => {
+    alert("message");
+  }, [isEditable, slides, project]);
+
   useEffect(() => {
     if (autosaveTimeoutRef.current) {
       clearTimeout(autosaveTimeoutRef.current);
@@ -225,9 +229,15 @@ const Editor = ({ isEditable, loading, imageLoading = false }: Props) => {
     if (isEditable) {
       autosaveTimeoutRef.current = setTimeout(() => {
         // save funciton
+        saveSlides();
       }, 2000);
     }
-  }, []);
+    return () => {
+      if (autosaveTimeoutRef.current) {
+        clearTimeout(autosaveTimeoutRef.current);
+      }
+    };
+  }, [slides, saveSlides, isEditable]);
 
   return (
     <div className="flex-1 flex flex-col h-full max-w-3xl mx-auto px-4 mb-20">
