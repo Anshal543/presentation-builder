@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { EllipsisVertical, Trash } from "lucide-react";
+import { updateSlides } from "@/actions/project";
 
 interface DraggableSlideProps {
   slide: Slide;
@@ -47,6 +48,25 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
     }),
     canDrag: isEditable,
   });
+
+  const [, drop] = useDrop({
+    accept: ["SLIDE", "LAYOUT"],
+    hover(item: { index: number; type: string }, monitor) {
+      if (!ref.current || !isEditable) {
+        return;
+      }
+      const draggedIndex = item.index;
+      const hoverIndex = index;
+      if (item.type === "SLIDE") {
+        if (draggedIndex === hoverIndex) {
+          return;
+        }
+        moveSlide(draggedIndex, hoverIndex);
+        item.index = hoverIndex;
+      }
+    },
+  });
+  drag(drop(ref));
 
   const handleContentChange = (
     contentId: string,
@@ -219,7 +239,14 @@ const Editor = ({ isEditable, loading, imageLoading = false }: Props) => {
   }, [currentSlide]);
 
   const saveSlides = useCallback(() => {
-    alert("message");
+    if (isEditable && project) {
+      console.log("Autosaving slides...");
+      // Implement your save logic here, e.g., API call or local storage
+      (async () => {
+        await updateSlides(project.id, JSON.parse(JSON.stringify(slides)));
+        // console.log("🟢 Slides saved successfully", res);
+      })();
+    }
   }, [isEditable, slides, project]);
 
   useEffect(() => {
