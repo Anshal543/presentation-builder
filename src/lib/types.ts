@@ -84,6 +84,19 @@ export interface LayoutSlides {
   type: string;
 }
 
+export interface LayoutGroup {
+  name: string;
+  layouts: Layout[];
+}
+
+export interface Layout {
+  name: string;
+  icon: React.FC;
+  type: string;
+  component: LayoutSlides;
+  layoutType: string;
+}
+
 /*
 [
   {

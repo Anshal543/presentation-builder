@@ -12,6 +12,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import Navbar from "./_components/Navbar/Navbar";
 import LayoutPreview from "./_components/editor-sidebar/leftsidebar/LayoutPreview";
 import Editor from "./_components/editor/Editor";
+import EditorSidebar from "./_components/editor-sidebar/rightsidebar";
 
 type Props = {};
 
@@ -85,6 +86,7 @@ const Page = (props: Props) => {
               imageLoading={imageLoading}
             />
           </div>
+          <EditorSidebar />
         </div>
       </div>
     </DndProvider>
