@@ -160,6 +160,7 @@ const DropZone: React.FC<DropZoneProps> = ({ index, isEditable, onDrop }) => {
   if (!isEditable) return null;
   return (
     <div
+      ref={dropRef as unknown as React.RefObject<HTMLDivElement>}
       className={cn(
         "h-4 my-2 rounded-md transition-all duration-200",
         isOver && canDrop ? "border-green-500 bg-green-100" : "border-gray-300",
@@ -290,6 +291,13 @@ const Editor = ({ isEditable, loading, imageLoading = false }: Props) => {
                   isEditable={isEditable}
                   imageLoading={imageLoading}
                 />
+                {isEditable && (
+                  <DropZone
+                    index={index + 1}
+                    onDrop={handleDrop}
+                    isEditable={isEditable}
+                  />
+                )}
               </React.Fragment>
             ))}
           </div>
