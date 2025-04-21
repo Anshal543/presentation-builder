@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -5,8 +6,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useSlideStore } from "@/store/useSlideStore";
-import { LayoutTemplate } from "lucide-react";
+import { LayoutTemplate, Type } from "lucide-react";
 import LayoutChooser from "./tabs/layoutChooser";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { component } from "@/lib/constants";
+import ComponentCard from "./tabs/components-tab/ComponentPreview";
 
 const EditorSidebar = () => {
   const { currentTheme } = useSlideStore();
@@ -27,6 +31,45 @@ const EditorSidebar = () => {
           </PopoverTrigger>
           <PopoverContent side="left" align="center" className="w-[480px] p-0">
             <LayoutChooser />
+          </PopoverContent>
+        </Popover>
+
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 rounded-full"
+            >
+              <Type className="h-5 w-5" />
+              <span className="sr-only">Add Text</span>
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent
+            side="left"
+            align="center"
+            className="w-[480px] p-0"
+            style={{
+              backgroundColor: currentTheme.backgroundColor,
+              color: currentTheme.fontColor,
+            }}
+          >
+            <ScrollArea className="h-[400px]">
+              <div className="p-4 fle flex-col space-y-6">
+                {component.map((group, idx) => (
+                  <div className="space-y-2" key={idx}>
+                    <h3 className="text-sm font-medium text-muted-foreground px-1">
+                      {group.name}
+                    </h3>
+                    <div className="grid grid-cols-3 gap-4">
+                      {group.components.map((item) => (
+                        <ComponentCard key={item.componentType} item={item} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </ScrollArea>
           </PopoverContent>
         </Popover>
       </div>

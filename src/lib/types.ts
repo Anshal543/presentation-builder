@@ -97,6 +97,19 @@ export interface Layout {
   layoutType: string;
 }
 
+export interface ComponentGroup {
+  name: string;
+  components: Component[];
+}
+
+interface Component {
+  name: string;
+  icon: string;
+  type: string;
+  component: ContentItem;
+  componentType: string;
+}
+
 /*
 [
   {
