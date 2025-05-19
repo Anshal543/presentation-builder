@@ -6,6 +6,7 @@ import { UserButton } from "@clerk/nextjs";
 import { Home, Play, Share } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
+import PresentationMode from "./PresentationMode";
 
 type Props = { presentationId: string };
 
@@ -74,9 +75,9 @@ const Navbar = ({ presentationId }: Props) => {
         </Button>
         <UserButton />
       </div>
-      {/* {isPresentationMode && (
+      {isPresentationMode && (
         <PresentationMode onClose={() => setIsPresentationMode(false)} />
-      )} */}
+      )}
     </nav>
   );
 };
