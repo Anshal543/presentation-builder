@@ -4,6 +4,7 @@ import { client } from "@/lib/prisma";
 import { onAuthenticateUser } from "./user";
 import { OutlineCard } from "@/lib/types";
 import { JsonValue } from "@prisma/client/runtime/library";
+import { Project } from "@prisma/client";
 
 export const getAllProjects = async () => {
   try {
@@ -281,7 +282,7 @@ export const deleteAllProjects = async (projectIds: string[]) => {
     const deletedProjects = await client.project.deleteMany({
       where: {
         id: {
-          in: projectsToDelete.map((project) => project.id),
+          in: projectsToDelete.map((project:Project) => project.id),
         },
       },
     });
