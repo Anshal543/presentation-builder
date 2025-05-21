@@ -8,7 +8,6 @@ import {
 import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
 import { User } from "@prisma/client";
 import { ChevronDown } from "lucide-react";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 type Props = {
@@ -18,10 +17,12 @@ type Props = {
 const NavFooter = ({ prismaUser }: Props) => {
   const { isLoaded, isSignedIn, user } = useUser();
   const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
   if (!isLoaded || !isSignedIn) {
     return null;
   }
+  const handleUpgrading = () => {
+    setLoading(true);
+  };
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -41,7 +42,7 @@ const NavFooter = ({ prismaUser }: Props) => {
                   className="w-full border-vivid bg-background-80 hover:bg-background-90 text-primary rounded-full font-bold "
                   variant={"default"}
                   size={"lg"}
-                  //   onClick={handleUpgrading}
+                  onClick={handleUpgrading}
                 >
                   {loading ? "Upgrading..." : "Upgrade"}
                 </Button>

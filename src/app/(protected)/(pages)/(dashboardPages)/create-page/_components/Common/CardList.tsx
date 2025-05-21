@@ -32,7 +32,6 @@ const CardList = ({
   setEditText,
   setEditingCard,
   setSelectedCard,
-  addOutline,
 }: CardListProps) => {
   const [draggedItem, setDraggedItem] = useState<OutlineCard | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);

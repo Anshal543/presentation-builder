@@ -1,21 +1,21 @@
 "use client";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Skeleton } from "@/components/ui/skeleton";
-import { LayoutSlides, Slide } from "@/lib/types";
-import { cn } from "@/lib/utils";
-import { useSlideStore } from "@/store/useSlideStore";
-import React, { useCallback, useEffect, useRef } from "react";
-import { useDrag, useDrop } from "react-dnd";
-import { v4 as uuidv4 } from "uuid";
-import { MasterRecursiveComponent } from "./MasterRecursiveComponent";
+import { updateSlides } from "@/actions/project";
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
+import { LayoutSlides, Slide } from "@/lib/types";
+import { cn } from "@/lib/utils";
+import { useSlideStore } from "@/store/useSlideStore";
 import { EllipsisVertical, Trash } from "lucide-react";
-import { updateSlides } from "@/actions/project";
+import React, { useCallback, useEffect, useRef } from "react";
+import { useDrag, useDrop } from "react-dnd";
+import { v4 as uuidv4 } from "uuid";
+import { MasterRecursiveComponent } from "./MasterRecursiveComponent";
 
 interface DraggableSlideProps {
   slide: Slide;
@@ -51,7 +51,7 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
 
   const [, drop] = useDrop({
     accept: ["SLIDE", "LAYOUT"],
-    hover(item: { index: number; type: string }, monitor) {
+    hover(item: { index: number; type: string }) {
       if (!ref.current || !isEditable) {
         return;
       }

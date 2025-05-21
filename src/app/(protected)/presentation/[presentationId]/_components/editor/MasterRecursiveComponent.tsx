@@ -45,10 +45,8 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = memo(
     imageLoading,
     onContentChange,
     slideId,
-    index,
     isEditable,
     isPreview,
-    classname,
   }) => {
     const handleChange = useCallback(
       (e: ChangeEvent<HTMLTextAreaElement>) => {

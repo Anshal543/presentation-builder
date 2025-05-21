@@ -150,7 +150,6 @@ const CreateAI = ({ onBack }: Props) => {
 
   useEffect(() => {
     setNoOfCards(outlines.length);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [outlines.length]);
 
   return (

@@ -3,9 +3,8 @@ import { NotFound } from "@/components/global/not-found";
 import Projects from "@/components/global/projects";
 import React from "react";
 
-type Props = {};
 
-const DashboardPage = async (props: Props) => {
+const DashboardPage = async () => {
   const allProjects = await getAllProjects();
   return (
     <div className="w-full flex flex-col gap-6 relative md:p-0 p-4">

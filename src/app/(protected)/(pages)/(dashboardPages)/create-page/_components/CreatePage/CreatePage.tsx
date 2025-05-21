@@ -1,21 +1,20 @@
 "use client";
-import React, { useEffect } from "react";
-import { motion } from "motion/react";
+import { Button } from "@/components/ui/button";
 import {
   containerVariants,
   CreatePageCard,
   itemVariants,
 } from "@/lib/constants";
-import { Button } from "@/components/ui/button";
-import RecentPrompts from "../GenerateAI/RecentPrompts";
 import usePromptStore from "@/store/usePromptStore";
+import { motion } from "motion/react";
+import RecentPrompts from "../GenerateAI/RecentPrompts";
 
 type Props = {
   onSelectOption: (option: string) => void;
 };
 
 const CreatePage = ({ onSelectOption }: Props) => {
-  const { prompts, setPage } = usePromptStore();
+  const { prompts } = usePromptStore();
   return (
     <motion.div
       variants={containerVariants}

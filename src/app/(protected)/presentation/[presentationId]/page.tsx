@@ -14,9 +14,8 @@ import LayoutPreview from "./_components/editor-sidebar/leftsidebar/LayoutPrevie
 import Editor from "./_components/editor/Editor";
 import EditorSidebar from "./_components/editor-sidebar/rightsidebar";
 
-type Props = {};
 
-const Page = (props: Props) => {
+const Page = () => {
   const params = useParams();
   const { setTheme } = useTheme();
   const { toast } = useToast();

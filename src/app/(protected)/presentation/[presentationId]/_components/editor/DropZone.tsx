@@ -20,7 +20,6 @@ export const DropZone: React.FC<DropZoneProps> = ({
 
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: "CONTENT_ITEM",
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     drop: (item: {
       type: string;
       componentType: string;

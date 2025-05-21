@@ -1,5 +1,4 @@
 import { generateLayouts } from "@/actions/chatgpt";
-import { updateTheme } from "@/actions/project";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
@@ -56,14 +55,10 @@ const ThemePicker = ({
         params.presentationId as string,
         currentTheme.name
       );
-      // const res = await updateTheme(
-      //   params.presentationId as string,
-      //   currentTheme.name
-      // );
+ 
       if (res.status !== 200 && !res?.data) {
         throw new Error("Failed to update theme");
       }
-      // resetSlideStore();
       toast({
         title: "Success",
         description: "Layouts generated successfully",

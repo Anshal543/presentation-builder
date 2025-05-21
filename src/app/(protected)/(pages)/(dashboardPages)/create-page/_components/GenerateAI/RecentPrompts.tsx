@@ -8,9 +8,8 @@ import { Button } from "@/components/ui/button";
 import useCreativeAIStore from "@/store/useCreativeAIStore";
 import { useToast } from "@/hooks/use-toast";
 
-type Props = {};
 
-const RecentPrompts = (props: Props) => {
+const RecentPrompts = () => {
   const { prompts, setPage } = usePromptStore();
   const { toast } = useToast();
   const { addMultipleOutlines, setCurrentAiPrompt } = useCreativeAIStore();
