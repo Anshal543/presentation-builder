@@ -1,3 +1,5 @@
+import { JsonValue } from "@prisma/client/runtime/library";
+
 export interface Slide {
   id: string;
   slideName: string;
@@ -108,6 +110,21 @@ interface Component {
   type: string;
   component: ContentItem;
   componentType: string;
+}
+
+export type Project =  {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    title: string;
+    slides: JsonValue;
+    userId: string;
+    outlines: string[];
+    isDeleted: boolean;
+    isSellable: boolean;
+    varientId: string | null;
+    thumbnail: string | null;
+    themeName: string;
 }
 
 /*
