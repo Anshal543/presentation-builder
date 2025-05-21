@@ -6,7 +6,7 @@ const Home = async () => {
   if (auth.status == 200 || auth.status == 201) {
     redirect("/dashboard");
   }
-  return "/sign-in";
+  redirect("/sign-in");
 };
 
 export default Home;
