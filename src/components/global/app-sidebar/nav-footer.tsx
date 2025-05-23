@@ -10,7 +10,6 @@ import { useToast } from "@/hooks/use-toast";
 import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
 import { User } from "@prisma/client";
 import { ChevronDown } from "lucide-react";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 type Props = {
@@ -22,7 +21,6 @@ const NavFooter = ({ prismaUser }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const { toast } = useToast();
 
-  const router = useRouter();
   if (!isLoaded || !isSignedIn) {
     return null;
   }
