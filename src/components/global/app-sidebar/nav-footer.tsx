@@ -1,13 +1,16 @@
 "use client";
+import { buySubscription } from "@/actions/lemonSqueezy";
 import { Button } from "@/components/ui/button";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useToast } from "@/hooks/use-toast";
 import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
 import { User } from "@prisma/client";
 import { ChevronDown } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 type Props = {
@@ -17,11 +20,31 @@ type Props = {
 const NavFooter = ({ prismaUser }: Props) => {
   const { isLoaded, isSignedIn, user } = useUser();
   const [loading, setLoading] = useState<boolean>(false);
+  const { toast } = useToast();
+
+  const router = useRouter();
   if (!isLoaded || !isSignedIn) {
     return null;
   }
-  const handleUpgrading = () => {
+
+  const handleUpgrading = async () => {
     setLoading(true);
+    try {
+      const res = await buySubscription(prismaUser.id);
+      if (res.status !== 200) {
+        throw new Error("Failed to upgrade subscription");
+      }
+      window.location.href = res.url;
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <SidebarMenu>
