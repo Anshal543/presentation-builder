@@ -1,6 +1,10 @@
+import { onAuthenticateUser } from "@/actions/user";
 import React from "react";
+import LemonSqueezAddApiKey from "./_components/LemonSqueezAddApiKey";
 
-const page = () => {
+const page = async () => {
+  const checkUser = await onAuthenticateUser();
+
   return (
     <div className="flex flex-col gap-6 relative">
       <div className="flex justify-between items-center">
@@ -13,6 +17,11 @@ const page = () => {
           </p>
         </div>
       </div>
+      <LemonSqueezAddApiKey
+        lemonSqueezyApiKey={checkUser?.user?.lemonSqueezyApiKey || ""}
+        storeId={checkUser?.user?.storeId || ""}
+        webhookSecret={checkUser?.user?.webhookSecret || ""}
+      />
     </div>
   );
 };

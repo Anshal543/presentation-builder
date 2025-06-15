@@ -207,13 +207,12 @@ export const updateSlides = async (projectId: string, slides: JsonValue) => {
     if (!updatedProject) {
       return { status: 500, error: "cannot update slides" };
     }
-    return { status: 200, data: updateSlides };
+    return { status: 200, data: updatedProject };
   } catch (error) {
     console.error("🔴 ERROR", error);
     return { status: 500, error: "Internal server error" };
   }
 };
-
 
 export const getDeletedProjects = async () => {
   try {
