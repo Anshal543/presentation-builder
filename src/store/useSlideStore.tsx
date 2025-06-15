@@ -61,11 +61,21 @@ export const useSlideStore = create(
       setCurrentSlide: (index: number) => {
         set({ currentSlide: index });
       },
+      // getOrderedSlides: () => {
+      //   return get()
+      //     .slides.slice()
+      //     .sort((a, b) => a.slideOrder - b.slideOrder);
+      // },
       getOrderedSlides: () => {
-        return get()
-          .slides.slice()
-          .sort((a, b) => a.slideOrder - b.slideOrder);
+        const slides = get().slides;
+
+        if (!Array.isArray(slides)) return []; // Return empty array if slides isn't an array
+
+        return slides
+          .slice() // clone to avoid mutating state
+          .sort((a, b) => (a.slideOrder ?? 0) - (b.slideOrder ?? 0)); // safe sort with fallback
       },
+
       reorderSlides: (fromIndex: number, toIndex: number) => {
         set((state) => {
           const newSlides = [...state.slides];
