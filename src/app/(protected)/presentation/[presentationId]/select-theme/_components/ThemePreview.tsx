@@ -7,7 +7,7 @@ import { useAnimation } from "motion/react";
 import { redirect, useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import ThemeCard from "./ThemeCard";
-import ThemePicker from "./ThemePicker";
+import {ThemePicker} from "./ThemePicker";
 import { themes } from "@/lib/constants";
 
 
