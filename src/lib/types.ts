@@ -1,3 +1,8 @@
+import { Prisma } from "@prisma/client";
+
+export type PrismaUser = Prisma.UserGetPayload<{
+  include: { PurchasedProjects: true };
+}>;
 export interface Slide {
   id: string;
   slideName: string;
