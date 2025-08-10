@@ -58,21 +58,21 @@ export const data = {
       url: "/dashboard",
       icon: Home,
     },
-    {
-      title: "Templates",
-      url: "/templates",
-      icon: Template,
-    },
+    // {
+    //   title: "Templates",
+    //   url: "/templates",
+    //   icon: Template,
+    // },
     {
       title: "Trash",
       url: "/trash",
       icon: Trash,
     },
-    {
-      title: "Settings",
-      url: "/settings",
-      icon: Settings,
-    },
+    // {
+    //   title: "Settings",
+    //   url: "/settings",
+    //   icon: Settings,
+    // },
   ],
 };
 
@@ -126,12 +126,12 @@ export const timeAgo = (timestamp: string) => {
 };
 
 export const CreatePageCard = [
-  {
-    title: "Use a",
-    highlightedText: "Template",
-    description: "Write a prompt and leave everything else for us to handle",
-    type: "template",
-  },
+  // {
+  //   title: "Use a",
+  //   highlightedText: "Template",
+  //   description: "Write a prompt and leave everything else for us to handle",
+  //   type: "template",
+  // },
   {
     title: "Generate with",
     highlightedText: "Creative AI",

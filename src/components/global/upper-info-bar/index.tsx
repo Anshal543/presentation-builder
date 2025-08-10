@@ -21,13 +21,13 @@ const UpperInfoBar = ({ user }: Props) => {
         <SearchBar />
         <ThemeSwitcher />
         <div className="flex flex-wrap gap-4 items-center justify-end">
-          <Button
+          {/* <Button
             size={"lg"}
             className="bg-primary-80 rounded-lg hover:bg-background-80 text-primary font-semibold cursor-not-allowed"
           >
             <Upload />
             Import
-          </Button>
+          </Button> */}
           <NewProjectButton user={user} />
         </div>
       </div>
