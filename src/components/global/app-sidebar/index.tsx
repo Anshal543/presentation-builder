@@ -35,11 +35,11 @@ const AppSidebar = ({
           <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground">
             <Avatar className="h-10 w-10 rounded-full">
               <AvatarImage src={"/vivid.png"} alt={`vivid-logo`} />
-              <AvatarFallback className="rounded-lg">VI</AvatarFallback>
+              <AvatarFallback className="rounded-lg">SC</AvatarFallback>
             </Avatar>
           </div>
-          <span className="truncate text-primary text-3xl font-semibold">
-            Vivid
+          <span className="truncate text-primary text-2xl font-semibold">
+            SlideCraft
           </span>
         </SidebarMenuButton>
       </SidebarHeader>

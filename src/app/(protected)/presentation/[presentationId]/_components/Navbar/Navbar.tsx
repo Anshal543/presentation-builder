@@ -47,12 +47,12 @@ const Navbar = ({ presentationId }: Props) => {
           <span className="hidden sm:inline ">Return Home</span>
         </Button>
       </Link>
-      <Link
+      {/* <Link
         href="/presentation/template-market"
         className="text-lg font-semibold hidden sm:block "
       >
         Go to Market Strategy
-      </Link>
+      </Link> */}
       <div className="flex items-center gap-4">
         <Button
           style={{
